@@ -1,0 +1,9 @@
+#!/bin/sh
+
+uci -qm import fstab <<EOF
+config mount 'storage'
+	option target '/storage'
+#	option uuid '9a96685a-13b0-4e65-838e-c7f689ed45ec'
+	option device 'IPCAM_STORAGE_DEVICE'
+	option enabled '1'
+EOF

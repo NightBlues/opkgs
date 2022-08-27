@@ -1,0 +1,49 @@
+config IPCAM_TELEGRAM_TOKEN
+	string "Telegram TOKEN"
+	depends on PACKAGE_ipcam
+	default "xxxxxxxxx:yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+	help
+      TOKEN for telegram bot to send notifications
+
+config IPCAM_TELEGRAM_CHAT_ID
+	int "Telegram CHAT_ID"
+	depends on PACKAGE_ipcam
+	default 000000000
+	help
+      Chat id for telegram bot where to send notifications
+
+config IPCAM_CAMERA_NAME
+	string "Motion camera_name"
+	depends on PACKAGE_ipcam
+	default "MyCam1"
+	help
+      Motion param camera_name
+
+config IPCAM_CAMERA_ID
+	int "Motion camera_id"
+	depends on PACKAGE_ipcam
+	default 100
+	help
+      Motion param camera_id
+
+config IPCAM_CAMERA_URL
+	string "Motion camera_url"
+	depends on PACKAGE_ipcam
+	default "rtsp://admin:PASSWORD@192.168.2.64:554/"
+	help
+      Motion param camera_url
+
+config IPCAM_TARGET_DIR_ALL
+	string "Motion target_dir for camera-all"
+	depends on PACKAGE_ipcam
+	default "/storage/camera-all"
+	help
+      Motion param target_dir for motion-all config
+
+config IPCAM_STORAGE_DEVICE
+	string "Device for /storage (path or uid)"
+	depends on PACKAGE_ipcam
+	default "/dev/sda1"
+	help
+      Device for /storage (path or uid)
+
