@@ -7,3 +7,32 @@ config mount 'storage'
 	option device 'IPCAM_STORAGE_DEVICE'
 	option enabled '1'
 EOF
+
+uci -qm import network <<EOF
+config interface 'wg0'
+	option proto 'wireguard'
+	option private_key 'IPCAM_WG_PRIV_KEY'
+	list addresses 'IPCAM_WG_IP'
+	option mtu '1380'
+
+config wireguard_wg0 'wgclient'
+	option public_key 'IPCAM_WG_SRV_PUB_KEY'
+	option endpoint_host 'IPCAM_WG_SRV_PUB_HOST'
+	option endpoint_port 'IPCAM_WG_SRV_PUB_PORT'
+	option persistent_keepalive '15'
+	option route_allowed_ips '1'
+	list allowed_ips 'IPCAM_WG_PREFIX'
+#	list allowed_ips '192.168.2.0/24' # other ipcam "edges"
+EOF
+
+# hope @zone[0] is lan
+uci add_list firewall.@zone[0].network="wg0"
+uci set network.lan.ipaddr='IPCAM_WG_LAN_IPADDR'
+# uci commit network
+
+uci -qm import dhcp <<EOF
+config 'host'
+        option 'name' 'cam1'
+        option 'ip'   'IPCAM_CAM1_IP'
+        option 'mac'  'IPCAM_CAM1_MAC_ADDR'
+EOF

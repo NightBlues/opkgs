@@ -47,3 +47,67 @@ config IPCAM_STORAGE_DEVICE
 	help
       Device for /storage (path or uid)
 
+config IPCAM_WG_PRIV_KEY
+	string "Wireguard private key"
+	depends on PACKAGE_ipcam
+	default "XXXXXXXXXX"
+	help
+      Wireguard private key of this device
+
+config IPCAM_WG_SRV_PUB_KEY
+	string "Wireguard public key of the server"
+	depends on PACKAGE_ipcam
+	default "XXXXXXXXXX"
+	help
+      Wireguard public key of server that connects all devices into one network
+
+config IPCAM_WG_SRV_PUB_HOST
+	string "Wireguard endpoint host of the server"
+	depends on PACKAGE_ipcam
+	default "mywgserver.org"
+	help
+      Wireguard endpoint host of server that connects all devices into one network
+
+
+config IPCAM_WG_SRV_PUB_PORT
+	int "Wireguard endpoint port of the server"
+	depends on PACKAGE_ipcam
+	default 51820
+	help
+      Wireguard endpoint port of server that connects all devices into one network
+
+config IPCAM_WG_IP
+	string "Wireguard local ip"
+	depends on PACKAGE_ipcam
+	default "192.168.3.7/32"
+	help
+      Wireguard local ip on wg0 interface, also allowedip for others
+
+config IPCAM_WG_PREFIX
+	string "Wireguard local prefix"
+	depends on PACKAGE_ipcam
+	default "192.168.3.0/24"
+	help
+      Wireguard local prefix on wg0 interface, also allowedip for us
+
+config IPCAM_WG_LAN_IPADDR
+	string "Our Lan prefix/ipaddr"
+	depends on PACKAGE_ipcam
+	default "192.168.22.1/24"
+	help
+      Just reconfiguration of default lan's 192.168.1.1/24
+
+config IPCAM_CAM1_MAC_ADDR
+	string "MAC addr of ipcam for dhcp static lease"
+	depends on PACKAGE_ipcam
+	default "XX:XX:XX:XX:XX:XX"
+	help
+      MAC addr of ipcam for dhcp static lease
+
+config IPCAM_CAM1_IP
+	string "IP addr of ipcam for dhcp static lease"
+	depends on PACKAGE_ipcam
+	default "192.168.22.64"
+	help
+      IP addr of ipcam for dhcp static lease
+

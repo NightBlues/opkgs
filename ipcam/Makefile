@@ -45,6 +45,16 @@ $(call ipcam_subst_var,IPCAM_CAMERA_ID,$(1))
 $(call ipcam_subst_var,IPCAM_CAMERA_URL,$(1))
 $(call ipcam_subst_var,IPCAM_TARGET_DIR_ALL,$(1))
 $(call ipcam_subst_var,IPCAM_STORAGE_DEVICE,$(1))
+$(call ipcam_subst_var,IPCAM_WG_PRIV_KEY,$(1))
+$(call ipcam_subst_var,IPCAM_WG_SRV_PUB_KEY,$(1))
+$(call ipcam_subst_var,IPCAM_WG_SRV_PUB_HOST,$(1))
+$(call ipcam_subst_var,IPCAM_WG_SRV_PUB_PORT,$(1))
+$(call ipcam_subst_var,IPCAM_WG_PORT,$(1))
+$(call ipcam_subst_var,IPCAM_WG_IP,$(1))
+$(call ipcam_subst_var,IPCAM_WG_PREFIX,$(1))
+$(call ipcam_subst_var,IPCAM_WG_LAN_IPADDR,$(1))
+$(call ipcam_subst_var,IPCAM_CAM1_MAC_ADDR,$(1))
+$(call ipcam_subst_var,IPCAM_CAM1_IP,$(1))
 endef
 
 
