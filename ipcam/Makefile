@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ipcam
 PKG_VERSION:=0.1
-PKG_RELEASE:=1
+PKG_RELEASE:=4
 # PKG_SOURCE:=
 # UNPACK_CMD=#cp -R $(PKG_SOURCE)/* $(1)
 # PKG_INSTALL:=1
@@ -20,7 +20,7 @@ define Package/ipcam
       +curl +libcurl @+LIBCURL_ZLIB @+LIBCURL_OPENSSL \
       +libopenssl \
       +libffmpeg-full +libx264 @+BUILD_NLS @+BUILD_PATENTED \
-      +motion
+      +motion-ffmpeg
   MENU:=1
 endef
 
@@ -44,6 +44,7 @@ $(call ipcam_subst_var,IPCAM_CAMERA_NAME,$(1))
 $(call ipcam_subst_var,IPCAM_CAMERA_ID,$(1))
 $(call ipcam_subst_var,IPCAM_CAMERA_URL,$(1))
 $(call ipcam_subst_var,IPCAM_TARGET_DIR_ALL,$(1))
+$(call ipcam_subst_var,IPCAM_TARGET_DIR,$(1))
 $(call ipcam_subst_var,IPCAM_STORAGE_DEVICE,$(1))
 $(call ipcam_subst_var,IPCAM_WG_PRIV_KEY,$(1))
 $(call ipcam_subst_var,IPCAM_WG_SRV_PUB_KEY,$(1))
@@ -78,6 +79,8 @@ $(call ipcam_subst_all,$(1)/etc/config/ipcam)
 	$(INSTALL_BIN) files/stats.sh $(1)/usr/bin/stats.sh
 	$(INSTALL_BIN) files/storageclean.sh $(1)/usr/bin/storageclean.sh
 
+	$(INSTALL_DATA) files/motion.conf $(1)/etc/motion.conf
+$(call ipcam_subst_all,$(1)/etc/motion.conf)
 	$(INSTALL_DATA) files/motion-all.conf $(1)/etc/motion-all.conf
 $(call ipcam_subst_all,$(1)/etc/motion-all.conf)
 	$(INSTALL_DIR) $(1)/etc/init.d

@@ -40,6 +40,13 @@ config IPCAM_TARGET_DIR_ALL
 	help
       Motion param target_dir for motion-all config
 
+config IPCAM_TARGET_DIR
+	string "Motion target_dir for camera (detection process)"
+	depends on PACKAGE_ipcam
+	default "/storage/camera"
+	help
+      Motion param target_dir for motion config (detection process)
+
 config IPCAM_STORAGE_DEVICE
 	string "Device for /storage (path or uid)"
 	depends on PACKAGE_ipcam
