@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ipcam
 PKG_VERSION:=0.1
-PKG_RELEASE:=4
+PKG_RELEASE:=6
 # PKG_SOURCE:=
 # UNPACK_CMD=#cp -R $(PKG_SOURCE)/* $(1)
 # PKG_INSTALL:=1
@@ -17,10 +17,12 @@ define Package/ipcam
   TITLE:=Metapackage for building image for IP Cam system with motion
   DEPENDS:=+kmod-wireguard +wireguard-tools +tcpdump-mini \
       +kmod-usb-storage +kmod-usb2 +e2fsprogs +block-mount \
+	  +kmod-usb-net-cdc-ether +usb-modeswitch +usbutils +kmod-usb-core \
       +curl +libcurl @+LIBCURL_ZLIB @+LIBCURL_OPENSSL \
       +libopenssl \
       +libffmpeg-full +libx264 @+BUILD_NLS @+BUILD_PATENTED \
       +motion-ffmpeg
+     # may be Target Images -> ramdisk (TARGET_ROOTFS_INITRAMFS=n)
   MENU:=1
 endef
 
@@ -78,6 +80,8 @@ $(call ipcam_subst_all,$(1)/etc/config/ipcam)
 	$(INSTALL_BIN) files/send_notify_video.sh $(1)/usr/bin/send_notify_video.sh
 	$(INSTALL_BIN) files/stats.sh $(1)/usr/bin/stats.sh
 	$(INSTALL_BIN) files/storageclean.sh $(1)/usr/bin/storageclean.sh
+	$(INSTALL_BIN) files/ipcam_config_check.sh $(1)/usr/bin/ipcam_config_check.sh
+$(call ipcam_subst_all,$(1)/usr/bin/ipcam_config_check.sh)
 
 	$(INSTALL_DATA) files/motion.conf $(1)/etc/motion.conf
 $(call ipcam_subst_all,$(1)/etc/motion.conf)
