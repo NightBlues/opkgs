@@ -92,3 +92,27 @@ config host 'cam1'
 EOF
 		;;
 esac
+
+echo <EOF >> /etc/crontabs/root
+50 8 * * * sh -c 'storageclean.sh'
+55 8 * * * sh -c 'send_notify_text.sh "$(stats.sh)"'
+57 8 * * * sh -c 'cd /storage/camera-all; send_notify_video.sh $(ls -rt | tail -2 | head -1)'
+10 20 * * * sh -c 'send_notify_text.sh "$(stats.sh)"'
+0 8 * * * /etc/init.d/motion-detect start
+0 17 * * * /etc/init.d/motion-detect stop
+0 18 * * * /etc/init.d/motion-detect stop
+0 19 * * * /etc/init.d/motion-detect stop
+0 20 * * * /etc/init.d/motion-detect stop
+0 21 * * * /etc/init.d/motion-detect stop
+0 22 * * * /etc/init.d/motion-detect stop
+0 23 * * * /etc/init.d/motion-detect stop
+0 0 * * * /etc/init.d/motion-detect stop
+0 1 * * * /etc/init.d/motion-detect stop
+0 2 * * * /etc/init.d/motion-detect stop
+0 3 * * * /etc/init.d/motion-detect stop
+0 4 * * * /etc/init.d/motion-detect stop
+0 5 * * * /etc/init.d/motion-detect stop
+0 6 * * * /etc/init.d/motion-detect stop
+0 7 * * * reboot
+
+EOF

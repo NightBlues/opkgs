@@ -1,8 +1,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ipcam
-PKG_VERSION:=0.1
-PKG_RELEASE:=6
+PKG_VERSION:=0.2
+PKG_RELEASE:=2
 # PKG_SOURCE:=
 # UNPACK_CMD=#cp -R $(PKG_SOURCE)/* $(1)
 # PKG_INSTALL:=1
@@ -66,6 +66,7 @@ define Package/ipcam/postrm
 
 rm -vf $(1)/etc/config/ipcam
 rm -vf $(1)/etc/motion-all.conf
+rm -vf $(1)/etc/motion-detect.conf
 rm -vf $(1)/etc/uci-defaults/999_ipcam
 endef
 
@@ -83,12 +84,13 @@ $(call ipcam_subst_all,$(1)/etc/config/ipcam)
 	$(INSTALL_BIN) files/ipcam_config_check.sh $(1)/usr/bin/ipcam_config_check.sh
 $(call ipcam_subst_all,$(1)/usr/bin/ipcam_config_check.sh)
 
-	$(INSTALL_DATA) files/motion.conf $(1)/etc/motion.conf
-$(call ipcam_subst_all,$(1)/etc/motion.conf)
+	$(INSTALL_DATA) files/motion-detect.conf $(1)/etc/motion-detect.conf
+$(call ipcam_subst_all,$(1)/etc/motion-detect.conf)
 	$(INSTALL_DATA) files/motion-all.conf $(1)/etc/motion-all.conf
 $(call ipcam_subst_all,$(1)/etc/motion-all.conf)
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) files/motion-all.initd $(1)/etc/init.d/motion-all
+	$(INSTALL_BIN) files/motion-detect.initd $(1)/etc/init.d/motion-detect
 
 	$(INSTALL_DIR) $(1)/storage
 	$(INSTALL_DIR) $(1)/etc/uci-defaults/
